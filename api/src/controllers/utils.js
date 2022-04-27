@@ -4,6 +4,7 @@ const { API_KEY } = process.env;
 
 
 // Get apiInfo 
+
 const getApiInfo = async () => {
     try{
         const videogames = [];
@@ -57,7 +58,7 @@ const getDBinfo = async () => {
             genres: g.dataValues.genres.map((g) => g.dataValues.name), //this gets each genre
             platforms: g.dataValues.platforms,
             description: g.dataValues.description,
-            // addedVideoGame: g.addedVideoGame,
+            
         }
     })
     return gamesWithGenre;

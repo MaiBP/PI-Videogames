@@ -30,16 +30,16 @@ const getVG = async (req, res) => {
 const getSingleVG = async (req, res ) =>{
     try{
         const {id} = req.params 
-        //search from API
-         if(id.length <= 3){
-             const singleVG = await getOneVideogame(id);
-             res.send(singleVG);
+        //search from API //  if id.length > 7 && typeof id === 'string'-->don't work!
+         if(id.length > 7){
+             const singleApiVG = await getOneVideogame(id);
+             res.status(200).send(singleApiVG);
          }else{
              //search from DB
              const dbVideogame = await getDBinfo();
-             const singleVG = dbVideogame.find((v) => v.id === id);
-             return singleVG
-             ? res.send(singleVG)
+             const singleDbVG = dbVideogame.find((v) => v.id === id);
+             return singleDbVG
+             ? res.send(singleDbVG)
              : res.status(400).send("Videogame not found");
          }
 
@@ -49,7 +49,7 @@ const getSingleVG = async (req, res ) =>{
 };
 
 
-// Create a new videogame. 
+// Create a new videogame. = post
 const createVG = async (req, res) =>{
  try{
     //create videogame
@@ -60,13 +60,13 @@ const createVG = async (req, res) =>{
      released: req.body.released,
      description: req.body.description,
      platforms: req.body.platforms,
-    //  addedVideoGame: req.body.addedVideoGame,
+   
     })
     // find the matching genres from client-db
     let genresInDB = await Genre.findAll({
         where:{
             name: {
-                [Op.in]: req.body.genres
+                [Op.in]: req.body.genres,
             }
         }
     });
@@ -83,58 +83,64 @@ const createVG = async (req, res) =>{
 
 
 // Update a videogame
-// const updateVG = async (req,res) => {
-// try{
-//     const {id} = req.params;
-//     let updatedVG = await Videogame.findOne({
-//         where:{
-//             id: id,
-//         },
-//     });
-//     await updatedVG.update({
-//      name: req.body.name,
-//      description: req.body.description,
-//      released: req.body.released,
-//      rating: req.body.rating,
-//      platforms: req.body.platforms,
-//     });
-    
-//     let genresInDB = await Genre.findAll({
-//         where: {
-//             name:{
-//                 [Op.in]: req.body.genres,
-//             }
-//         }
-//     });
-//     await updatedVG.setTypes(genresInDB);
-//     res.send(updatedVG);
+const updateVG = async (req,res) => {
+ try{
+        const {id} = req.params;
+        console.log("1")
+        const updatedVG = await Videogame.findOne({
+            where:{
+                id: id,
+            },
+        });
 
-// }catch(err){
-//      res.status(400).send({errMsg: err})
-// }
-// }
+     await updatedVG.update({
+        name: req.body.name,
+        description: req.body.description,
+        released: req.body.released,
+        rating: req.body.rating,
+        platforms: req.body.platforms,
+        background_image: req.body.background_image,
+      });
+
+   console.log("2")
+    let genresInDB = await Genre.findAll({
+        where: {
+            name:{
+                [Op.in]: req.body.genres
+            }
+        }
+    });
+    console.log("3")
+    await updatedVG.setGenres(genresInDB); 
+    return res.status(200).send("ok");
+   
+    }catch(err){
+    
+     res.status(400).send({errMsg: err})
+     }
+};
 
 // // Delete a videogame
-// const deleteVG = async(req,res)=>{
-//     try{
-//     const { id } = req.params;
-//     const deletedVG = await Videogame.findByPk(id);
-//     if(deletedVG){
-//         await deletedVG.destroy();
-//         return res.send('Videogame deleted!');
-//     }
-//     res.status(400).send('Videogame not found');
-//     }catch(err){
-//         res.status(400).send({errMsg: err})
-//     }
-// }
+const deleteVG = async(req,res)=>{
+    try{
+    const { id } = req.params;
+    const deletedVG = await Videogame.findByPk(id);
+    if(deletedVG){
+        await deletedVG.destroy();
+        return res.send('Videogame deleted!');
+    }
+    res.status(400).send('Videogame not found');
+    }catch(err){
+        res.status(400).send({errMsg: err})
+    }
+}
 
 module.exports = {
 getVG,
 getSingleVG,
 createVG,
-// updateVG,
-// deleteVG 
+updateVG,
+deleteVG 
 }
 
 

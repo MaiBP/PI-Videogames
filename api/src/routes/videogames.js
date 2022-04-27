@@ -3,8 +3,8 @@ const {
     getVG,
     getSingleVG,
     createVG,
-    // updateVG,
-    // deleteVG 
+    updateVG,
+    deleteVG 
 } = require ('../controllers/videogames')
 
 
@@ -22,10 +22,10 @@ videogameRouter.get('/videogames/:id', getSingleVG)
 videogameRouter.post('/videogames', createVG)
 
 // // PUT /videogames
-// videogameRouter.put('/videogames/:id', updateVG)
+videogameRouter.put('/videogames/:id', updateVG)
 
 // // DELETE /videogames
-// videogameRouter.delete('/videogames/:id', deleteVG)
+videogameRouter.delete('/videogames/:id', deleteVG)
 
 module.exports = videogameRouter;
 
