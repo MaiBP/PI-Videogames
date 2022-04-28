@@ -1,14 +1,14 @@
 const axios = require('axios');
 const {Videogame, Genre} =require('../db');
-const { API_KEY } = process.env;
+const { VIDEOGAME_URL, GENRES_URL, API_KEY } = process.env;
 
 
-// Get apiInfo 
+// --- Get apiInfo -- //
 
 const getApiInfo = async () => {
     try{
         const videogames = [];
-         let apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`;
+         let apiUrl = `${VIDEOGAME_URL}?key=${API_KEY}`;
          for (let i = 1; i < 8; i++) {
              let gamesPages = await axios.get(apiUrl);
               gamesPages.data?.results.forEach((e) => {
@@ -30,7 +30,7 @@ const getApiInfo = async () => {
     } 
 };
 
-// Find videogames in DB.
+//--- Find videogames in DB --- //
 const getDBinfo = async () => {
     try{
     const info = await Videogame.findAll({
@@ -39,13 +39,6 @@ const getDBinfo = async () => {
             model: Genre,
             attributes: ['name'],
         }
-        // include: {
-        //     model: Genre,
-        //     attributes: ['name'],
-        //     through: {
-        //         attributes: [],
-        //     }
-        // }
     })
     //Map to look for videogame
     const gamesWithGenre = info.map((g) => {
@@ -66,9 +59,9 @@ const getDBinfo = async () => {
     }catch(err){
         console.log(err);
     }
-}
+};
 
-//Concat videogames from api and genres from DB.
+//--- Concat videogames from api and genres from DB ---//
 
 const getAllInfo = async () => {
     try{
@@ -79,12 +72,12 @@ const getAllInfo = async () => {
     }catch(err){
         console.log(err);
     }
-}
+};
 
-// Find one videogame
+//--- Find one videogame ---//
 const getOneVideogame = async (id) => {
     try{
-        const game = await axios.get(`https://api.rawg.io/api/games/${id}/`);
+        const game = await axios.get(`${VIDEOGAME_URL}/${id}/`);
         const videogame = {
             id: game.data.id,
             name: game.data.name,
@@ -100,14 +93,14 @@ const getOneVideogame = async (id) => {
     } catch(err){
         console.log(err);
     }
-}
+};
  
 
 
-// Genres from API saved in DB
+//--- Genres from API saved in DB ---//
 const getGenre = async () => {
     try{
-        const infoApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+        const infoApi = await axios.get(`${GENRES_URL}?key=${API_KEY}`)
         // returns ['Action']
         const apiGenres = infoApi.data.results.map((g) => {
           return { name : g.name };
@@ -119,21 +112,20 @@ const getGenre = async () => {
     }catch (err){
         console.log(err);
     }
-}
+};
 
 
-// Get genres in DB 
+//--- Get genres in DB ---//
 const genresInDB = async () =>{
     try{
         let genDb = await Genre.findAll();
         genDb = genDb.map(g => g.toJSON());
-        // genDb = genDb.map(g => g.toJSON());
         return genDb;
 
     }catch(err){
         console.log(err)
     }
-}
+};
 
 
 module.exports = {
@@ -144,21 +136,3 @@ module.exports = {
     getGenre,
     genresInDB
 };
-
-
-// [ ] GET /videogames:
-// Obtener un listado de los videojuegos
-// Debe devolver solo los datos necesarios para la ruta principal
-// [ ] GET /videogames?name="...":
-// Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
-// Si no existe ningún videojuego mostrar un mensaje adecuado
-// [ ] GET /videogame/{idVideogame}:
-// Obtener el detalle de un videojuego en particular
-// Debe traer solo los datos pedidos en la ruta de detalle de videojuego
-// Incluir los géneros asociados
-// [ ] GET /genres:
-// Obtener todos los tipos de géneros de videojuegos posibles
-// En una primera instancia deberán traerlos desde rawg y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
-// [ ] POST /videogame:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
-// Crea un videojuego en la base de datos
