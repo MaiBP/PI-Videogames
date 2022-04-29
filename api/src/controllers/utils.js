@@ -8,7 +8,7 @@ const { VIDEOGAME_URL, GENRES_URL, API_KEY } = process.env;
 const getApiInfo = async () => {
     try{
         const videogames = [];
-         let apiUrl = `${VIDEOGAME_URL}?key=${API_KEY}`;
+         let apiUrl = `${VIDEOGAME_URL}?key=${API_KEY}&page_size=100`;
          for (let i = 1; i < 8; i++) {
              let gamesPages = await axios.get(apiUrl);
               gamesPages.data?.results.forEach((e) => {
