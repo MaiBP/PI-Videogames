@@ -1,13 +1,23 @@
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+
+//IMPORT MY COMPONENTS
+import LandingPage  from './components/landingPg/LandingPg'
+import Home  from './components/home/Home.jsx'
+
 
 function App() {
   return (
-    <BrowserRouter>
+    
     <div className="App">
-      <h1>Henry Videogames</h1>
+     <BrowserRouter>
+     <Routes>
+        <Route path='/' element= {<LandingPage/>} />
+        <Route path='/home' element={<Home/>} />
+     </Routes>
+      </BrowserRouter>
     </div>
-    </BrowserRouter>
+    
   );
 }
 
