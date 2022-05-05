@@ -31,7 +31,7 @@ const getSingleVG = async (req, res ) => {
     try{
         const {id} = req.params 
         //search from API //  
-         if(id.length > 7){
+         if(id.length <= 3){
              const singleApiVG = await getOneVideogame(id);
              res.status(200).send(singleApiVG);
          }else{
