@@ -1,80 +1,111 @@
-import React from 'react';
-import {useState, useEffect, Fragment} from 'react';
+import {useState,useEffect, Fragment} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
+// import Styles from '../home/Home.modules.css'
+import VideogameCard from '../videogameCard/VideogameCard'
+import Pagination from './pagination/Pagination'
 
+//---Import Actions--//
 import { 
     getVideogames,
-    // getGenres,
- } from '../../actions/index.js'
+    getByGenres,
+    // getByName,
+    
 
-//import my components
-import GameCard  from '../gameCard/GameCard'
-// import  NavBar from '../navBar/NavBar'
-// import SearchBar from '../searchBar/SearchBar'
+ } from '../../actions/actions.js'
+
 
 const Home  = () => {
-    const dispatch = useDispatch()
-    const allVideogames = useSelector ((state) => state.videogames) // = mapStateToProps
-    
-    useEffect(() => {
-        dispatch(getVideogames());
-        // dispatch(getGenres()) 
-    }, [dispatch])
-
-//* HANDLERS *//
-function handleClick(e){
-    e.preventDefault();
-    dispatch(getVideogames());
-
-}    
-
-return (
-<Fragment>
-
-
-    <Link to= '/videogames'> Create Videogame </Link>
-    <h1> Videogames Home Page</h1>
-    <button onClick={e=> {handleClick(e)}}>
-    Let's create!
-    </button>
-
-
-   <select>
-       <option value= 'more'> more </option> 
-       <option value= 'less'> less </option>
-      
-   </select>
-   <select>
-       <option value='all'>All</option>
-       <option value='created'>Created</option>
-       <option value='api'>E</option>
-   </select>
+    // const [,/*refresh*/ setRefresh] = useState(false);
+    const dispatch = useDispatch();
+    const allVideogames = useSelector((state) => state.copyVideogames);
+    const genres = useSelector((state)=> state.genres);
    
-   {/* name,rating, background_image, genres */}
 
- <section>
-     {allVideogames?.map((game) => {
-      return (
-          <fragment>
-             
-            <GameCard
-                  key={game.id}
-                  id={game.id}
-                  name={game.name}
-                  background_image={game.background_image}
-                  genres={game.genres}
-                  rating={game.rating}
-                />
-            
-            </fragment>
-            )
- })
-}
- </section>
+   //---Pagination ---//
 
-</Fragment>
-);
+const [currentPage,setCurrentPage] = useState(1)
+const [gamesPerPage,setGamesPerPage] = useState(16)
+const lastIndex = currentPage * gamesPerPage;
+const firstIndex = lastIndex - gamesPerPage;
+const currentGames = allVideogames?.slice(firstIndex,lastIndex)
+
+const pagination = (pageNum) =>{
+    setCurrentPage(pageNum)
 }
 
+ useEffect (()=> {
+    dispatch(getVideogames())
+    dispatch(getByGenres())
+ },[dispatch]);
+
+//--sort by name a-z / z-a--//
+//  const sortHandler = (e) =>{
+//        dispatch(sortVideogame(e.target.value));
+    
+//    };
+
+
+
+// const handleReload = () => {
+//        window.location.reload();
+//    };
+ 
+return(
+    <>
+    <div className="defaultValue">
+        <div className="defaultValue">
+            <select>
+            <option value='Filter order' selected disabled> Filter order </option> 
+            <option value='A-Z'> A-Z </option>
+            <option value='Z-A'> Z-A </option>
+            <option value='topated'>Top Rated</option>
+            <option value='lowerrated'>Lower Rated</option>
+           </select>
+           <select>
+            <option value='Filter by' selected disabled> Filter by </option>   
+            <option value='all'> All </option>
+            <option value='existing'> Existing </option>
+            <option value='created'>Created </option>
+           </select>
+           <select>
+               <option value='Filter Genres' selected disabled> Genres </option>
+               {genres.map((g)=>{
+                   return(
+                       <option 
+                       key={g.id} 
+                       value={g.name}> 
+                       {g.name}
+                       </option>
+                   )
+               })}
+            </select>
+            <div className='Pagination'>
+                 <Pagination gamesPerPage={gamesPerPage}
+            allVideogames={allVideogames.length} pagination={pagination}/>
+            </div>
+           
+            <div>
+                {currentGames.map( g => {
+                    return(
+                        <VideogameCard 
+                        key={g.id}
+                        id={g.id}
+                        name={g.name}
+                        background_image={g.background_image}
+                        genres={g.genres}
+                        rating={g.rating}/>
+                    )
+                })}
+            </div>
+
+
+        </div>
+    </div>
+
+
+    </>
+
+ )
+}
 export default Home;
+

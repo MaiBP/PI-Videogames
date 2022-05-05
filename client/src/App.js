@@ -4,6 +4,9 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 //IMPORT MY COMPONENTS
 import LandingPage  from './components/landingPg/LandingPg'
 import Home  from './components/home/Home.jsx'
+// import About from './components/about/About'
+// import GameDetail from './components/gameDetail/GameDetail'
+// import GameCreateForm from './components/gameCreateForm/gameForm'
 
 
 function App() {
