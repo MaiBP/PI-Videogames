@@ -4,7 +4,7 @@ import React from "react";
 const VideogameCard = ({ id, name, background_image, genres, rating, platforms }) => {
 
 return (
-  <div> 
+  <div value={id}> 
     <h3>{name}</h3>
     <h3>{rating}</h3>
     <h3>{genres}</h3>

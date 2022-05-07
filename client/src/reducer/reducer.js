@@ -1,10 +1,17 @@
 
+import {
+filterVideogames,
+filterByGenres,
+sortVideogame,
+} from './utils'
+
 
 const initialState = {
-    videogames : [], 
-    genres: [],
+    videogames : [],
     copyVideogames : [],
-    gameDetail: []
+    apiGames : [],
+    createdGame: [],
+    genres: [], 
 }
 
 function rootReducer (state = initialState, action) {
@@ -14,12 +21,55 @@ function rootReducer (state = initialState, action) {
          ...state,
          videogames : action.payload,
          copyVideogames: action.payload,
+         apiGames : filterVideogames('Existing', action.payload), //search api
+         createdGame: filterVideogames('Created', action.payload) //search db
      }
-     case 'GET_BY_NAME' :
-         return {
-             ...state,
-            copyVideogames: action.payload, 
-         }
+
+    case 'GET_GENRES':
+      return {
+        ...state,
+        genres: action.payload
+      };
+    // calls filters from utils folder
+    case 'FILTER_BY_GENRE':
+      return {
+        ...state,
+        copyVideogames: filterByGenres(
+          action.payload['genres'],
+          action.payload['status'] === 'Existing'
+          ? state.apiGames
+          : action.payload['status'] === 'Created'
+          ? state.createdGame
+          : state.videogames
+        )
+      }
+
+     case 'FILTER_BY_CREATED':
+      return {
+        ...state,
+        copyVideogames: filterVideogames(action.payload, state.videogames)
+      }
+
+//PRUEBA!
+case 'SORT_VIDEOGAME':
+      return {
+        ...state,
+        copyVideogames: sortVideogame(action.payload, state.videogames)
+      }
+
+    // case 'SORT_BY_NAME':
+    //   return {
+    //     ...state,
+    //     copyVideogames: sortByName(action.payload)
+    //   }
+
+    // case 'SORT_BY_RATING':
+    //   return {
+    //     ...state,
+    //     copyVideogames: sortByRating(action.payload)
+    //   }
+
+
   
     // case 'GET_BY_ID':
     //  return {
@@ -27,11 +77,7 @@ function rootReducer (state = initialState, action) {
     //      gameDetail: action.payload,
     //  }
 
-    //  case 'GET_GENRES':
-    //   return {
-    //     ...state,
-    //     genres: action.payload
-    //   };
+    
 
     //  case 'CREATE_GAME':
     //      return {
@@ -46,44 +92,9 @@ function rootReducer (state = initialState, action) {
     //          ...state, 
     //      }
 
-     //---FILTERS
-     case 'FILTER_BY_NAME':
-         const orderGames = 
-         action.payload === 'A-Z'
-         ? state.copyVideogames.sort((a, b) => {
-              if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                return 1;
-              }
-              if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                return -1;
-              }
-              return 0;
-            })
-          : state.copyVideogames.sort((a, b) => {
-              if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                return -1;
-              }
-              if (b.name.toLowerCase() > a.name.toLowerCase()) {
-                return 1;
-              }
-              return 0;
-            });
 
-      return {
-        ...state,
-       copyVideogames: orderGames,
-      };  
-      // case 'FILTER_DB_GAMES':
-      //     const totalGames = state.videogames;
-      //     const filterCreatedGames = 
-      //     action.payload === 'DB'
-      //     ? totalGames.filter((g)=> g.createdGame === true)
-      //     : totalGames.filter((g)=> g.createdGame !== true)
-      //     return{
-      //         ...state,
-      //         copyVideogames:
-      //         action.payload === 'All' ? totalGames : filterCreatedGames
-      //     }
+
+
 
      default: return state;
  };

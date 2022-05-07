@@ -8,19 +8,23 @@ import Pagination from './pagination/Pagination'
 import { 
     getVideogames,
     getByGenres,
-    // getByName,
+    filterGamesByCreated,
+    filterGenres,
+    sortVideogame,
+   
+    
     
 
  } from '../../actions/actions.js'
 
 
 const Home  = () => {
-    // const [,/*refresh*/ setRefresh] = useState(false);
+    const [,/*refresh*/ setRefresh] = useState(false);
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.copyVideogames);
     const genres = useSelector((state)=> state.genres);
+    const [status, setStatus] = useState('All')
    
-
    //---Pagination ---//
 
 const [currentPage,setCurrentPage] = useState(1)
@@ -38,37 +42,54 @@ const pagination = (pageNum) =>{
     dispatch(getByGenres())
  },[dispatch]);
 
-//--sort by name a-z / z-a--//
-//  const sortHandler = (e) =>{
-//        dispatch(sortVideogame(e.target.value));
-    
-//    };
+//--FILTER BY STATUS--all, created, existing 
+ const handleFilterCreated = (e) =>{
+     setStatus(e.target.value)
+     dispatch(filterGamesByCreated(e.target.value));
+     setCurrentPage(1);
+     setRefresh((prevState) => !prevState); // refresh 
+   };
+//--FILTER BY GENRE (search by genre)
+const handleFilterGenre = (e) => {
+    dispatch(filterGenres(e.target.value, status));//gets the value and the status
+    setCurrentPage(1)
+    setRefresh((prevState) => !prevState); // refresh 
+}
+//---->SORT ORDER
+
+const handleSort= (e) => {
+    dispatch(sortVideogame(e.target.value));
+    setRefresh((prevState) => !prevState);
+}
 
 
 
-// const handleReload = () => {
-//        window.location.reload();
-//    };
+
+const handleReloadBtn = () => {
+       window.location.reload();
+   };
  
 return(
     <>
     <div className="defaultValue">
         <div className="defaultValue">
-            <select>
-            <option value='Filter order' selected disabled> Filter order </option> 
+            <select onChange={handleSort}className='defaultValue' name='Genre' >
+            <option value='Sortby' selected disabled> Sort by </option> 
             <option value='A-Z'> A-Z </option>
             <option value='Z-A'> Z-A </option>
-            <option value='topated'>Top Rated</option>
-            <option value='lowerrated'>Lower Rated</option>
+             </select>
+             <select onChange={handleSort}className='defaultValue' name='Genre' >
+            <option value='Top Rated'>Top Rated⬆</option>
+            <option value='Lower Rated'>Lower Rated⬇</option>
+            </select>
+           <select  onChange={e => handleFilterCreated(e)}className='defaultValue'>
+            <option value='Filterby' selected disabled> Filter by </option>   
+            <option value='All'>All</option>
+            <option value='Existing'> Existing </option>
+            <option value='Created'>Created </option>
            </select>
-           <select>
-            <option value='Filter by' selected disabled> Filter by </option>   
-            <option value='all'> All </option>
-            <option value='existing'> Existing </option>
-            <option value='created'>Created </option>
-           </select>
-           <select>
-               <option value='Filter Genres' selected disabled> Genres </option>
+           <select onChange={handleFilterGenre} className='defaultValue' name='Genres'>
+               <option value='Filter by Genres' selected disabled> Genres </option>
                {genres.map((g)=>{
                    return(
                        <option 
@@ -83,7 +104,9 @@ return(
                  <Pagination gamesPerPage={gamesPerPage}
             allVideogames={allVideogames.length} pagination={pagination}/>
             </div>
-           
+           <button onClick={handleReloadBtn}>
+               {/* <img alt='Reload' src={img}/> */}
+           </button>
             <div>
                 {currentGames.map( g => {
                     return(

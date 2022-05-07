@@ -16,8 +16,6 @@ export function getVideogames(){
     } 
    } 
 }
-
-
 //-- One game data --//
 
 export const getByName = (name) => {
@@ -51,6 +49,48 @@ export const getByGenres = (id) => {
         })
     }
 }
+
+
+export const filterGenres = (genres, status) => {
+    return{
+        type: 'FILTER_BY_GENRE',
+        payload: {genres, status}
+    }
+}
+
+
+export const filterGamesByCreated = (value) => {
+    return {
+        type: 'FILTER_BY_CREATED',
+        payload: value 
+    }
+        
+}
+
+// SORT PRUEBA!
+export const sortVideogame = (sortOrder) =>{
+ return {
+     type: 'SORT_VIDEOGAME',
+     payload: sortOrder
+ }
+}
+
+////---------SORT by Name
+// export const sortByNameOrder= (payload) =>{
+//  return {
+//      type: 'SORT_BY_NAME',
+//      payload,
+//  }
+// }
+
+// export const sortByRatingOrder = (payload) => {
+//     return {
+//         type: 'SORT_BY_RATING',
+//         payload,
+//     }
+// }
+
+
 
 
     
