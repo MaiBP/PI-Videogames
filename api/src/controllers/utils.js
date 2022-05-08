@@ -1,15 +1,16 @@
 const axios = require('axios');
 const {Videogame, Genre} =require('../db');
-const {URL_GAMES, URL_GENRES, API_KEY} = process.env;
+const {API_KEY} = process.env;
 
-// ?offset=0&limit=100 --> it limits the info and increasing the performance(reduces networktime)
+// ?offset=0&limit=100 --> it limits the info and increasing the performance(reduces networktime) // Not working!
+//&page_size=100 --> limits page size, works!
 
 // --- Get apiInfo -- //
 
 const getApiInfo = async () => {
     try{
         const videogames = [];
-         let apiUrl = `${URL_GAMES}?key=${API_KEY}?offset=0&limit=100`;
+         let apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`;
          for (let i = 1; i < 8; i++) {
              let gamesPages = await axios.get(apiUrl);
               gamesPages.data?.results.forEach((e) => {
@@ -78,7 +79,7 @@ const getAllInfo = async () => {
 //--- Find one videogame ---//
 const getOneVideogame = async (id) => {
     try{
-        const game = await axios.get(`${URL_GAMES}/${id}/?=key${API_KEY}?offset=0&limit=100`);
+        const game = await axios.get(`https://api.rawg.io/api/games/${id}?=key${API_KEY}`);
         const videogame = {
             id: game.data.id,
             name: game.data.name,
@@ -101,7 +102,7 @@ const getOneVideogame = async (id) => {
 //--- Genres from API saved in DB ---//
 const getGenre = async () => {
     try{
-        const infoApi = await axios.get(`${URL_GENRES}?key=${API_KEY}`)
+        const infoApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
         // returns ['Action']
         const apiGenres = infoApi.data.results.map((g) => {
           return { name : g.name };
