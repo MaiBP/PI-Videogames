@@ -1,6 +1,7 @@
-import {useState,useEffect, Fragment} from 'react';
+import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 // import Styles from '../home/Home.modules.css'
+import NavBar from '../navBar/NavBar';
 import VideogameCard from '../videogameCard/VideogameCard'
 import Pagination from './pagination/Pagination'
 
@@ -11,11 +12,10 @@ import {
     filterGamesByCreated,
     filterGenres,
     sortVideogame,
+    // searchVideogame,
    
-    
-    
-
  } from '../../actions/actions.js'
+
 
 
 const Home  = () => {
@@ -62,7 +62,10 @@ const handleSort= (e) => {
     setRefresh((prevState) => !prevState);
 }
 
-
+// const handleSearch = (name) => {
+//     dispatch(searchVideogame(name));
+//     setCurrentPage(1);
+// }
 
 
 const handleReloadBtn = () => {
@@ -71,16 +74,18 @@ const handleReloadBtn = () => {
  
 return(
     <>
+    <NavBar/>
     <div className="defaultValue">
         <div className="defaultValue">
             <select onChange={handleSort}className='defaultValue' name='Genre' >
-            <option value='Sortby' selected disabled> Sort by </option> 
+            <option value='Sortby'selected disabled> Sort Order </option> 
             <option value='A-Z'> A-Z </option>
             <option value='Z-A'> Z-A </option>
-             </select>
-             <select onChange={handleSort}className='defaultValue' name='Genre' >
-            <option value='Top Rated'>Top Rated⬆</option>
-            <option value='Lower Rated'>Lower Rated⬇</option>
+            </select>
+            <select onChange={handleSort}>
+            <option value='Rating'selected disabled> Rating </option> 
+            <option value='Top Rated'>Top⬆</option>
+            <option value='Lower Rated'>Lower⬇</option>
             </select>
            <select  onChange={e => handleFilterCreated(e)}className='defaultValue'>
             <option value='Filterby' selected disabled> Filter by </option>   
@@ -104,7 +109,8 @@ return(
                  <Pagination gamesPerPage={gamesPerPage}
             allVideogames={allVideogames.length} pagination={pagination}/>
             </div>
-           <button onClick={handleReloadBtn}>
+           <button onClick={ () => handleReloadBtn}>
+               Reload
                {/* <img alt='Reload' src={img}/> */}
            </button>
             <div>

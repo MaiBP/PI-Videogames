@@ -3,6 +3,7 @@ import {
 filterVideogames,
 filterByGenres,
 sortVideogame,
+// searchVideogame,
 } from './utils'
 
 
@@ -30,6 +31,36 @@ function rootReducer (state = initialState, action) {
         ...state,
         genres: action.payload
       };
+
+    case 'GET_BY_NAME':
+      return {
+        ...state,
+        copyVideogames: action.payload,
+      }
+    
+    case 'GET_BY_ID':{
+      return {
+        ...state,
+        copyVideogames: action.payload,
+      }
+    }
+    case 'ADD_VIDEOGAME':{
+      return {
+        ...state,
+      }
+    }
+
+    case 'UPDATE_VIDEOGAME': {
+      return{
+        ...state,
+      }
+    }
+    case 'DELETE_VIDEOGAME': {
+      return{
+        ...state,
+      }
+    }
+
     // calls filters from utils folder
     case 'FILTER_BY_GENRE':
       return {
@@ -50,51 +81,21 @@ function rootReducer (state = initialState, action) {
         copyVideogames: filterVideogames(action.payload, state.videogames)
       }
 
-//PRUEBA!
-case 'SORT_VIDEOGAME':
+
+      case 'SORT_VIDEOGAME':
       return {
         ...state,
         copyVideogames: sortVideogame(action.payload, state.videogames)
       }
 
-    // case 'SORT_BY_NAME':
-    //   return {
-    //     ...state,
-    //     copyVideogames: sortByName(action.payload)
-    //   }
+      // case 'SEARCH_VIDEOGAME':
+      //   return {
+      //     ...state,
+      //     copyVideogames: searchVideogame(action.payload, state.videogames)
+      //   }
 
-    // case 'SORT_BY_RATING':
-    //   return {
-    //     ...state,
-    //     copyVideogames: sortByRating(action.payload)
-    //   }
-
-
+   
   
-    // case 'GET_BY_ID':
-    //  return {
-    //      ...state,
-    //      gameDetail: action.payload,
-    //  }
-
-    
-
-    //  case 'CREATE_GAME':
-    //      return {
-    //          ...state,
-    //      }
-    //  case 'DELETE_GAME':
-    //      return {
-    //          ...state,
-    //      }
-    //  case 'UPDATE_GAME':
-    //      return {
-    //          ...state, 
-    //      }
-
-
-
-
 
      default: return state;
  };

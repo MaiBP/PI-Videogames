@@ -1,4 +1,4 @@
-//-- FILTER LOGIC
+//-- FILTERS, SORT & SEARCH
 
 
 export const filterVideogames = (value, array) =>{
@@ -16,7 +16,7 @@ export const filterByGenres = (genres, array) => {
     return array.filter(game => game.genres.includes(genres))
 }
 
-//Prueba!!
+
 export const sortVideogame = (sortOrder, array) => {
     switch (sortOrder) {
         case 'A-Z':
@@ -29,34 +29,25 @@ export const sortVideogame = (sortOrder, array) => {
             })
         case 'Top Rated':
             return array.sort((a,b) => {
-                if(a.rating > b.rating) return 1
-                if (a.rating < b.rating) return -1
+                if(a.rating > b.rating) return -1
+                if (b.rating > a.rating) return 1
                 else return 0
             })
         case 'Lower Rated':
             return array.sort((a,b) => {
-               if(a.rating > b.rating) return -1
-               if (a.rating < b.rating) return 1
+               if(a.rating > b.rating) return 1
+               if (b.rating > a.rating) return -1
                 else return 0
             })   
         default:
             return array;
     }
-}
+};
 
-// return array.sort((a,b) => {
-        //     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-        // })
-        // case 'Top Rated': 
-        // return array.sort((a,b) =>{
-        //     // if(a.rating > b.rating) return 1;
-        //     return a.rating - b.rating
-        // })
-        // case 'Lower Rated':
-        //      return array.sort((a,b) =>{
-        //     //  if(a.rating > b.rating) return -1;
-        //     return b.rating - a.rating
-        // })
+// export const searchVideogame = (name, array) => {
+//     return array.filter((game) => game.name.toLowerCase() === name.toLowerCase());
+
+// }
 
 
 
@@ -70,28 +61,9 @@ export const sortVideogame = (sortOrder, array) => {
 
 
 
-// //----REVISAR
-// export const sortByName = (payload, array)=>{
-//     switch(payload) {
-//         case 'A-Z': 
-//         return array.sort((a, b) => {
-//        if (a.name.toLowerCase() > b.name.toLowerCase()){
-//            return 1;
-//        }
-//        if (a.name.toLowerCase() < b.name.toLowerCase()){
-//            return -1;
-//        }
-//        return 0;
-//        case 'Z-A'
-//     })
-      
+
+
      
-    
-//         default:
-//             return sortOrder;
-//     }
-// }  
-
 
 
 
