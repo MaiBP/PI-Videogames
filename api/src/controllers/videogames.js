@@ -4,7 +4,7 @@ const { Op } = require ('sequelize');
 const { getOneVideogame, getApiInfo, getDBinfo, getAllInfo } = require('./utils');
 
 
-// --- GET all or a single videogame by name(query) --- // if there's a query, it shows the first 15 videogames matches. 
+// --- GET all or a single videogame ---// 
 
 const getVG = async (req, res) => {
  try{

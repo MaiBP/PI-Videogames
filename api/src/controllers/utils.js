@@ -2,14 +2,14 @@ const axios = require('axios');
 const {Videogame, Genre} =require('../db');
 const {URL_GAMES, URL_GENRES, API_KEY} = process.env;
 
-
+// ?offset=0&limit=100 --> it limits the info and increasing the performance(reduces networktime)
 
 // --- Get apiInfo -- //
 
 const getApiInfo = async () => {
     try{
         const videogames = [];
-         let apiUrl = `${URL_GAMES}?key=${API_KEY}&page_size=100`;
+         let apiUrl = `${URL_GAMES}?key=${API_KEY}?offset=0&limit=100`;
          for (let i = 1; i < 8; i++) {
              let gamesPages = await axios.get(apiUrl);
               gamesPages.data?.results.forEach((e) => {
@@ -78,7 +78,7 @@ const getAllInfo = async () => {
 //--- Find one videogame ---//
 const getOneVideogame = async (id) => {
     try{
-        const game = await axios.get(`${URL_GAMES}/${id}/`);
+        const game = await axios.get(`${URL_GAMES}/${id}/?=key${API_KEY}?offset=0&limit=100`);
         const videogame = {
             id: game.data.id,
             name: game.data.name,
