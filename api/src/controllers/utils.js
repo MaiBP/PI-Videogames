@@ -79,7 +79,7 @@ const getAllInfo = async () => {
 //--- Find one videogame ---//
 const getOneVideogame = async (id) => {
     try{
-        const game = await axios.get(`https://api.rawg.io/api/games/${id}?=key${API_KEY}`);
+        const game = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
         const videogame = {
             id: game.data.id,
             name: game.data.name,

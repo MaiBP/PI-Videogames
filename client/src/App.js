@@ -7,6 +7,7 @@ import Home  from './components/home/Home.jsx'
 // import About from './components/about/About'
 import GameDetail from './components/gameDetail/GameDetail'
 import GameCreateForm from './components/gameCreateForm/GameCreateForm'
+import NotFoundPg from './components/notFoundPg/NotFoundPg'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/home/:id' element={<GameDetail/>} />
          <Route path='/updateVideogame/:id' element={<GameCreateForm/>} />
          {/* <Route path='/home/about' element={<About/>} /> */}
+         <Route path="*" element={<NotFoundPg />} />
      </Routes>
       </BrowserRouter>
     </div>

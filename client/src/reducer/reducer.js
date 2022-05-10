@@ -13,6 +13,7 @@ const initialState = {
     apiGames : [],
     createdGame: [],
     genres: [], 
+    gameDetail: []
 }
 
 function rootReducer (state = initialState, action) {
@@ -22,6 +23,7 @@ function rootReducer (state = initialState, action) {
          ...state,
          videogames : action.payload,
          copyVideogames: action.payload,
+        //  gameDetail: action.payload,
          apiGames : filterVideogames('Existing', action.payload), //search api
          createdGame: filterVideogames('Created', action.payload) //search db
      }
@@ -37,13 +39,19 @@ function rootReducer (state = initialState, action) {
         ...state,
         copyVideogames: action.payload,
       }
-    
-    case 'GET_BY_ID':{
+      case 'GET_BY_ID':{
       return {
         ...state,
-        copyVideogames: action.payload,
+        gameDetail: action.payload,
       }
     }
+    
+    // case 'GET_BY_ID':{
+    //   return {
+    //     ...state,
+    //     copyVideogames: action.payload,
+    //   }
+    // }
     case 'ADD_VIDEOGAME':{
       return {
         ...state,

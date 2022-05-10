@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import NavBar from '../navBar/NavBar';
 import VideogameCard from '../videogameCard/VideogameCard'
 import Pagination from './pagination/Pagination'
-
+import Loading from '../assets/loader1.gif'
 //---Import Actions--//
 import { 
     getVideogames,
@@ -12,7 +12,7 @@ import {
     filterGamesByCreated,
     filterGenres,
     sortVideogame,
-    // searchVideogame,
+    getByName,
    
  } from '../../actions/actions.js'
 
@@ -25,17 +25,19 @@ const Home  = () => {
     const genres = useSelector((state)=> state.genres);
     const [status, setStatus] = useState('All')
    
-   //---Pagination ---//
+    
+    //---Pagination ---//
+    const [currentPage,setCurrentPage] = useState(1)
+    const [gamesPerPage,setGamesPerPage] = useState(16)
+    const lastIndex = currentPage * gamesPerPage;
+    const firstIndex = lastIndex - gamesPerPage;
+    const currentGames = allVideogames?.slice(firstIndex,lastIndex)
+    
+    const [loader, setLoader] = useState(true)
 
-const [currentPage,setCurrentPage] = useState(1)
-const [gamesPerPage,setGamesPerPage] = useState(16)
-const lastIndex = currentPage * gamesPerPage;
-const firstIndex = lastIndex - gamesPerPage;
-const currentGames = allVideogames?.slice(firstIndex,lastIndex)
-
-const pagination = (pageNum) =>{
+   const pagination = (pageNum) =>{
     setCurrentPage(pageNum)
-}
+    }
 
  useEffect (()=> {
     dispatch(getVideogames())
@@ -62,19 +64,21 @@ const handleSort= (e) => {
     setRefresh((prevState) => !prevState);
 }
 
-// const handleSearch = (name) => {
-//     dispatch(searchVideogame(name));
-//     setCurrentPage(1);
-// }
-
+const handleSearch= (value) => {
+    dispatch(getByName(value))
+    setCurrentPage(1)
+}
 
 const handleReloadBtn = () => {
        window.location.reload();
    };
- 
+
+ if (currentPage && loader) {
+     setLoader(false)
+ }
 return(
     <>
-    <NavBar/>
+      <NavBar onSearch={handleSearch}/>
     <div className="defaultValue">
         <div className="defaultValue">
             <select onChange={handleSort}className='defaultValue' name='Genre' >
@@ -105,16 +109,20 @@ return(
                    )
                })}
             </select>
-            <div className='Pagination'>
-                 <Pagination gamesPerPage={gamesPerPage}
-            allVideogames={allVideogames.length} pagination={pagination}/>
+            
+            <div 
+            className='Pagination'>
+            <Pagination gamesPerPage={gamesPerPage}
+            allVideogames={allVideogames.length} 
+            onPage={pagination}/>
             </div>
-           <button onClick={ () => handleReloadBtn}>
+            
+           <button onClick={handleReloadBtn}>
                Reload
                {/* <img alt='Reload' src={img}/> */}
            </button>
             <div>
-                {currentGames.map( g => {
+                {currentGames.length > 0 && !loader ?(currentGames.map( g => {
                     return(
                         <VideogameCard 
                         key={g.id}
@@ -122,9 +130,22 @@ return(
                         name={g.name}
                         background_image={g.background_image}
                         genres={g.genres}
-                        rating={g.rating}/>
+                        rating={g.rating}
+                        />
                     )
-                })}
+                })
+                ) : !currentGames && loader ? (
+                    <img alt='loader' src={Loading}/>
+                   
+                ) : (
+                    <div>
+                        <h1>LOADING...</h1>
+                       <img alt='loader' src={Loading} width='100%' hight='auto'/>
+                    </div>
+                )
+            
+            }
+                
             </div>
 
 

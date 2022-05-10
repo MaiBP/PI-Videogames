@@ -1,16 +1,36 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const VideogameCard = ({ id, name, background_image, genres, rating, platforms }) => {
+//--HOME CARDS
+const VideogameCard = ({ id, name, background_image, genres, rating }) => {
 
 return (
-  <div value={id}> 
-    <h3>{name}</h3>
-    <h3>{rating}</h3>
-    <h3>{genres}</h3>
-    <h3>{platforms}</h3>
-    <img src={background_image} alt='img' width='200px'hight='250px'/>
+    <div className='card'>
+    <Link 
+    to={`/home/${id}`}>
+      <h2 className='game-name'> {name} </h2> 
+     </Link>
+    <div>
+      <span> ⭐ Rating </span>
+      <h3>{rating}</h3>
+    </div>
+    <div className='Genres'>
+      <span> 🏹 Genres </span>
+      <div>
+        {genres && genres.map((e) => {
+          return(
+            <div key={e}>{e}</div>
+          )
+        })}
+      </div>
+    </div>
+    <div className='image-bg'>
+   <img src={background_image} alt={name} width='300px' height='200px'/>
+    </div>
+    {/* <h3>{description}</h3> */}
   </div>
+
+  
 )
 }
 export default VideogameCard;

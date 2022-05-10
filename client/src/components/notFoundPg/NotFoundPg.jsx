@@ -1,12 +1,12 @@
 import React from 'react';
-import GameOver from '../assets/img404.gif'
+import page404 from '../assets/img404.gif'
 
 const Page404 = () => {
   return (
     <div className='container'>
       <div className='grid'>
         <div>
-          <img className='img404' src={GameOver} alt='img404'></img>
+          <img className='img404' alt='img404' width='700px' height='500px'> {page404} </img>
         </div>
         <div>
           <div>
@@ -15,6 +15,7 @@ const Page404 = () => {
           </div>
           <div className='page404'>
             <p>
+              Sorry, page not found.
               Click the button below to go back to the
               homepage.
             </p>

@@ -30,23 +30,40 @@ const getVG = async (req, res) => {
 const getSingleVG = async (req, res ) => {
     try{
         const {id} = req.params 
-        //search from API //  
-         if(id.length <= 3){
+         //search from DB
+         if(id.length > 7 && typeof id === 'string'){
+            const dbVideogame = await getDBinfo();
+            const singleDbVG = dbVideogame.find((v) => v.id === id);
+             return res.status(200).send(singleDbVG)
+         }else{//search from API // 
              const singleApiVG = await getOneVideogame(id);
-             res.status(200).send(singleApiVG);
-         }else{
-             //search from DB
-             const dbVideogame = await getDBinfo();
-             const singleDbVG = dbVideogame.find((v) => v.id === id);
-             return singleDbVG
-             ? res.send(singleDbVG)
-             : res.status(400).send("Videogame not found");
+             return res.status(200).send(singleApiVG);
          }
-
-    }catch(err){
-        res.status(400).send({errMsg: err})
+    } catch(err){
+        res.status(400).send( {err: "Videogame not found"});
     }
 };
+
+// const getSingleVG = async (req, res ) => {
+//     try{
+//         const {id} = req.params 
+//         //search from API //  
+//          if(id.length > 3){
+//              const singleApiVG = await getOneVideogame(id);
+//              res.status(200).send(singleApiVG);
+//          }else{
+//              //search from DB
+//              const dbVideogame = await getDBinfo();
+//              const singleDbVG = dbVideogame.find((v) => v.id === id);
+//              return singleDbVG
+//              ? res.send(singleDbVG)
+//              : res.status(400).send("Videogame not found");
+//          }
+
+//     }catch(err){
+//         res.status(400).send({errMsg: err})
+//     }
+// };
 
 
 // --- Create a new videogame = post --- //

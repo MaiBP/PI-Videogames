@@ -229,7 +229,7 @@ const GameCreateForm = () =>{
                 <label>Background Image:</label>
                <input
                 className='form-input'
-                type='text'
+                type='url'
                 placeholder='URL is required'
                 name='background_image'
                 value={dataState.background_image} 
