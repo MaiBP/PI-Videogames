@@ -2,6 +2,7 @@ import React, {useState, useEffect}from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { useParams} from "react-router-dom";
+// import Styles from '../gameCreateForm/GameCreateForm.module.css'
 
 import {
     getByGenres,
@@ -176,9 +177,8 @@ const GameCreateForm = () =>{
         )}
         
         { validator && <div className='alert'> {validator}</div>}
-        <form className='form' id='form' onSubmit={e => handleSubmit(e)}>
-            <div className='form-container'>
-                <label>Name:</label>
+        <form id='form' onSubmit={e => handleSubmit(e)}>
+           <label>Name:</label>
                 <input 
                 className='form-input'
                 type='text'
@@ -187,9 +187,7 @@ const GameCreateForm = () =>{
                 value={dataState.name} 
                 onChange={e => handleUpdate(e)}
                 />
-            </div>
-         
-            <div className='form-container'>
+           
                 <label>Description:</label>
                 <input
                  className='form-input'
@@ -199,9 +197,6 @@ const GameCreateForm = () =>{
                 value={dataState.description} 
                 onChange={e => handleUpdate(e)}
                 />
-            </div>
-
-            <div className='form-container'>
                 <label>Released date:</label>
                <input
                 className='form-input'
@@ -211,8 +206,6 @@ const GameCreateForm = () =>{
                 value={dataState.released} 
                 onChange={e => handleUpdate(e)}
                 />
-            </div>
-            <div className='form-container'>
                 <label>Rating:</label>
                 <input
                 className='form-input'
@@ -224,8 +217,6 @@ const GameCreateForm = () =>{
                 onChange={e => handleUpdate(e)}
                 />
                 <p>{dataState.rating}</p>
-            </div>
-            <div className='form-container'>
                 <label>Background Image:</label>
                <input
                 className='form-input'
@@ -235,9 +226,7 @@ const GameCreateForm = () =>{
                 value={dataState.background_image} 
                 onChange={e => handleUpdate(e)}
                 />
-            </div>
-            <div className='platforms'>
-                <label>Platforms:</label>
+            <label>Platforms:</label>
                 <div className='check-box'>
                     {Platforms.map( e => (
                        
@@ -253,9 +242,8 @@ const GameCreateForm = () =>{
                         <p> {e} </p>
                     </div>
                     ))}
-                   
-                </div>
-            </div>
+               </div>
+            
              <div className='genres-form'>
                 <label>Genres:</label>
                 <div className='check-box'>

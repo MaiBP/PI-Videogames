@@ -102,7 +102,7 @@ export const postVideogame = (data) =>{
 export const deleteVideogame = (id) => {
     return async function(dispatch){
         try{
-            await axios.delete(`http://localhost:3001/videogame/${id}`)
+            await axios.delete(`http://localhost:3001/videogames/${id}`)
             return dispatch({
                 type: 'DELETE_VIDEOGAME',
             })
@@ -115,7 +115,7 @@ export const deleteVideogame = (id) => {
 export const updateVideogame = (id, data) => {
     return async function(dispatch){
         try{
-            await axios.put(`http://localhost:3001/videogame/${id}`, data);
+            await axios.put(`http://localhost:3001/videogames/${id}`, data);
             return dispatch({
                 type: 'UPDATE_VIDEOGAME'
             })

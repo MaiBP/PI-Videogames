@@ -23,8 +23,8 @@ const NavBar = ({onSearch}) =>{
     <>
     <nav className='nav'>
       <div className='value'>
-        <img src='#' alt='#'/>
-       <span>Videogames App</span>
+        {/* <img src='#' alt='#'/> */}
+       <span>🎮Videogames App</span>
        <form onSubmit={handleSubmit}>
       <input onChange={handleSearchValue}
       value={value}
