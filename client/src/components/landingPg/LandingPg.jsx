@@ -1,18 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-// import Styles from './landing/LandingPage'
+import {NavLink} from 'react-router-dom'
+import Styles from '../landingPg/LandingPg.module.css'
 
-export default function LandingPage(){
+
+const LandingPage =() => {
     return (
-        <>
-        <div>
-             <h1> Game is not over </h1>
-        <Link to ='./home'>
-            <button> Start </button>
-        </Link>
+        <div className={Styles.bg}>
+             <h1 className={Styles.h1}> Game ON! </h1> 
+               <NavLink to ='./home'>
+               <button className={Styles.button}> Start </button>
+               </NavLink>        
         </div>
         
-        </>
 
     )
 }
+export default LandingPage

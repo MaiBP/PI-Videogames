@@ -1,10 +1,10 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-// import Styles from '../home/Home.modules.css'
+import Styles from '../home/Home.module.css'
 import NavBar from '../navBar/NavBar';
 import VideogameCard from '../videogameCard/VideogameCard'
 import Pagination from './pagination/Pagination'
-import Loading from '../assets/loader1.gif'
+import Loading from '../assets/DonkeyKongLoader.gif'
 //---Import Actions--//
 import { 
     getVideogames,
@@ -79,25 +79,30 @@ const handleReloadBtn = () => {
 return(
     <>
       <NavBar onSearch={handleSearch}/>
-    <div className="defaultValue">
-        <div className="defaultValue">
-            <select onChange={handleSort}className='defaultValue' name='Genre' >
+    <main className={Styles.mainFlex}>
+    <div className={Styles.filters}>
+        <div className={Styles.selects}>
+            <select onChange={handleSort}
+            className={Styles.select}name='Genre' >
             <option value='Sortby'selected disabled> Sort Order </option> 
             <option value='A-Z'> A-Z </option>
             <option value='Z-A'> Z-A </option>
             </select>
-            <select onChange={handleSort}>
+            <select onChange={handleSort} 
+            className={Styles.select}>
             <option value='Rating'selected disabled> Rating </option> 
             <option value='Top Rated'>Top⬆</option>
             <option value='Lower Rated'>Lower⬇</option>
             </select>
-           <select  onChange={e => handleFilterCreated(e)}className='defaultValue'>
+           <select  onChange={e => handleFilterCreated(e)}
+           className={Styles.select}>
             <option value='Filterby' selected disabled> Filter by </option>   
             <option value='All'>All</option>
             <option value='Existing'> Existing </option>
             <option value='Created'>Created </option>
            </select>
-           <select onChange={handleFilterGenre} className='defaultValue' name='Genres'>
+           <select onChange={handleFilterGenre} 
+           className={Styles.select} name='Genres'>
                <option value='Filter by Genres' selected disabled> Genres </option>
                {genres.map((g)=>{
                    return(
@@ -111,17 +116,18 @@ return(
             </select>
             
             <div 
-            className='Pagination'>
+            className={Styles.pagination}>
             <Pagination gamesPerPage={gamesPerPage}
             allVideogames={allVideogames.length} 
             onPage={pagination}/>
             </div>
             
-           <button onClick={handleReloadBtn}>
+           <button onClick={handleReloadBtn}
+           className={Styles.refreshButton}>
                Reload
                {/* <img alt='Reload' src={img}/> */}
            </button>
-            <div>
+            <section className={Styles.sectionFlex}>
                 {currentGames.length > 0 && !loader ?(currentGames.map( g => {
                     return(
                         <VideogameCard 
@@ -135,24 +141,20 @@ return(
                     )
                 })
                 ) : !currentGames && loader ? (
-                    <img alt='loader' src={Loading}/>
+                    <img alt='loader'
+                    className={Styles.loader} src={Loading}/>
                    
                 ) : (
                     <div>
                         <h1>LOADING...</h1>
                        <img alt='loader' src={Loading} width='100%' hight='auto'/>
                     </div>
-                )
-            
-            }
-                
-            </div>
-
-
+                )}
+            </section>
         </div>
+
     </div>
-
-
+    </main>
     </>
 
  )

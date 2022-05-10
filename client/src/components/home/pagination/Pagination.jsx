@@ -1,5 +1,5 @@
 import React from 'react';
-// import Styles from '../pagination/Pagination.modules.css'
+// import Styles from '../pagination/Pagination.module.css'
 
 const Pagination= ({ gamesPerPage, allVideogames, onPage}) => {
  const pages = [];
