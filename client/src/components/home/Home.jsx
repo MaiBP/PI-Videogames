@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-// import Styles from '../home/Home.module.css'
+import Styles from '../home/Home.module.css'
 import NavBar from '../navBar/NavBar';
 import VideogameCard from '../videogameCard/VideogameCard'
 import Pagination from './pagination/Pagination'
@@ -27,11 +27,12 @@ const Home  = () => {
    
     
     //---Pagination ---//
-    const [currentPage,setCurrentPage] = useState(1)
-    const [gamesPerPage,setGamesPerPage] = useState(16)
-    const lastIndex = currentPage * gamesPerPage;
-    const firstIndex = lastIndex - gamesPerPage;
-    const currentGames = allVideogames?.slice(firstIndex,lastIndex)
+    const [currentPage,setCurrentPage] = useState(1) // set page to 1
+    const [gamesPerPage,setGamesPerPage] = useState(16) // shows 16 games
+    const lastIndex = currentPage * gamesPerPage;  
+    const firstIndex = lastIndex - gamesPerPage;     
+    const currentGames = allVideogames?.slice(firstIndex,lastIndex) 
+
     
     const [loader, setLoader] = useState(true)
 
@@ -146,7 +147,15 @@ return(
                    
                 ) : (
                     <div>
-                        <h1>LOADING...</h1>
+                        <div className={Styles.spinner}>
+                            <span>L</span>
+                            <span>O</span>
+                            <span>A</span>
+                            <span>D</span>
+                            <span>I</span>
+                            <span>N</span>
+                            <span>G</span>
+                     </div>
                        <img alt='loader' src={Loading} width='100%' hight='auto'/>
                     </div>
                 )}

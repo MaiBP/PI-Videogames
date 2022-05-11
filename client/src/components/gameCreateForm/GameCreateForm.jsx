@@ -2,7 +2,7 @@ import React, {useState, useEffect}from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { useParams} from "react-router-dom";
-// import Styles from '../gameCreateForm/GameCreateForm.module.css'
+import Styles from '../gameCreateForm/GameCreateForm.module.css'
 
 import {
     getByGenres,
@@ -72,8 +72,9 @@ const GameCreateForm = () =>{
     })
     
  //--HANDLERS--//
+ //validations
  function handleSubmit(e){
-     e.preventDefault();
+     e.preventDefault(); //srting method without spaces
      if(!dataState.name.trim() && !dataState.description && !dataState.released.trim() && !dataState.rating && !dataState.background_image && !dataState.platforms.length && !dataState.genres.length){
         setValidator('OOopps! All the fields are required to create your game')
     } else if (!dataState.name.trim()){
@@ -97,7 +98,7 @@ const GameCreateForm = () =>{
                 alert('Game created successfully')
             } else{
                 dispatch(updateVideogame(id, dataState))
-                alert('Game modified successfully');
+                alert('Game updated successfully');
             }
         }
         setValidator('');
@@ -177,7 +178,7 @@ const GameCreateForm = () =>{
         )}
         
         { validator && <div className='alert'> {validator}</div>}
-        <form id='form' onSubmit={e => handleSubmit(e)}>
+        <form id='form' className={Styles.form}onSubmit={e => handleSubmit(e)}>
            <label>Name:</label>
                 <input 
                 className='form-input'
@@ -226,12 +227,13 @@ const GameCreateForm = () =>{
                 value={dataState.background_image} 
                 onChange={e => handleUpdate(e)}
                 />
-            <label>Platforms:</label>
-                <div className='check-box'>
+            <label className={Styles.platforms}>Platforms:</label>
+                <div className={Styles.checkbox}>
                     {Platforms.map( e => (
                        
                     <div key={e} className='platforms-form'>
                          <input
+            
                         className='check'
                         type='checkbox'
                         name='platforms'
