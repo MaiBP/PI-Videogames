@@ -1,9 +1,12 @@
 import React from 'react';
 // import Styles from '../pagination/Pagination.module.css'
 
+
+ 
 const Pagination= ({ gamesPerPage, allVideogames, onPage}) => {
- const pages = [];
- for(let i = 1; i <= Math.ceil(allVideogames / gamesPerPage); i++){
+ const pages = [];//-- push the number of pages
+                      //gets all games devided by the games per page 
+ for(let i = 1; i <= Math.ceil(allVideogames / gamesPerPage); i++){ //288 games / 16 = 18 pages
    pages.push(i)
  }
 
@@ -23,32 +26,6 @@ const Pagination= ({ gamesPerPage, allVideogames, onPage}) => {
  </nav>
 
  )
-
-
-  //  <nav>
-  //    <ul>
-  //      {pages?.map(num => (
-  //        <li key={num}
-  //        >
-  //          <button onClick={() => onPage(num)}>
-  //          </button>
-  //        </li>
-  //      ))}
-  //    </ul>
-  //  </nav>
-//  )
- // push the number of pages according to the current page. 
-
-// const handleClick = (e) => {
-//   for(let page of pages) {
-//     if (page === parseInt(e.target.value)){
-//       document.getElementById(page).classList.add(Styles.btn_active); //set styles for buttons
-//     } else {
-//       document.getElementById(page).classList.remove(Styles.btn_active)
-//     }
-//   }
-//   onPage(e.target.value);
-// }
 
 };
 

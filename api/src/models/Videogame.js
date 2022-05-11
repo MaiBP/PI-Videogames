@@ -6,7 +6,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('videogame', {
-    id: {//creamos el id unico. 
+    id: {//unique id created
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
@@ -43,19 +43,3 @@ module.exports = (sequelize) => {
 
   });
 };
-
-
-
-
-// Base de datos
-// El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
-
-// [ ] Videojuego con las siguientes propiedades:
-// ID: * No puede ser un ID de un videojuego ya existente en la API rawg
-// Nombre *
-// Descripción *
-// Fecha de lanzamiento
-// Rating
-// Plataformas *
-
-//--- AGREGUE BACKROUND IMAGE Y EL VIDEOGAME CREADO

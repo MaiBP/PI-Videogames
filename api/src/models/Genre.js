@@ -5,11 +5,8 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('genre', {
     id: {
-      // type: DataTypes.UUID,
-      // defaultValue: DataTypes.UUIDV4,
-      // primaryKey: true,
-      primaryKey: true,
       type: DataTypes.INTEGER,
+      primaryKey: true,
       autoIncrement: true,
     },
     name: {
@@ -18,6 +15,3 @@ module.exports = (sequelize) => {
     }
   });
 }
-// Genero con las siguientes propiedades:
-// ID
-// Nombre

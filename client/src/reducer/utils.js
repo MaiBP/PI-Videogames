@@ -20,8 +20,8 @@ export const filterByGenres = (genres, array) => {
 export const sortVideogame = (sortOrder, array) => {
     switch (sortOrder) {
         case 'A-Z':
-            return array.sort((a,b) => {
-                return a.name.localeCompare(b.name);
+            return array.sort((a,b) => {  // sort in place
+                return a.name.localeCompare(b.name);  // string method returns a number
             });
         case 'Z-A':
             return array.sort((a,b)=> {
@@ -44,10 +44,7 @@ export const sortVideogame = (sortOrder, array) => {
     }
 };
 
-// export const searchVideogame = (name, array) => {
-//     return array.filter((game) => game.name.toLowerCase() === name.toLowerCase());
 
-// }
 
 
 
