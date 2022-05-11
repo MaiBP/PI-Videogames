@@ -90,14 +90,6 @@ function rootReducer (state = initialState, action) {
         copyVideogames: sortVideogame(action.payload, state.videogames)
       }
 
-      // case 'SEARCH_VIDEOGAME':
-      //   return {
-      //     ...state,
-      //     copyVideogames: searchVideogame(action.payload, state.videogames)
-      //   }
-
-   
-  
 
      default: return state;
  };

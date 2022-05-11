@@ -27,7 +27,7 @@ return (
     <div className='image-bg'>
    <img src={background_image} alt={name} width='300px' height='200px'/>
     </div>
-    {/* <h3>{description}</h3> */}
+    
   </div>
 
   

@@ -125,12 +125,7 @@ export const updateVideogame = (id, data) => {
     }
 }
 
-// export const searchVideogame = (name) => {
-//     return{
-//         type: 'SEARCH_VIDEOGAME',
-//         payload: name
-//     }
-// }
+
 
 
 

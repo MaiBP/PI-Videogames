@@ -8,9 +8,9 @@ const { getOneVideogame, getApiInfo, getDBinfo, getAllInfo } = require('./utils'
 
 const getVG = async (req, res) => {
  try{
-    const {name} = req.query;
+    const {name} = req.query; 
     const allInfo = await getAllInfo();
-    if(name){
+    if(name){ //both names to lowercase & takes up to 16 characters
         let videogame = allInfo.filter((v) => v.name.toLowerCase().includes(name.toLowerCase())).slice(0,16);
         videogame.length
         ? res.status(200).send(videogame)
@@ -106,7 +106,7 @@ const updateVG = async (req,res) => {
             }
         
         }); 
-        //ste genres & update!
+        //state genres & update!
         await updatedVG.setGenres(genresInDB);
         res.status(200).send(updatedVG);
 
