@@ -27,7 +27,8 @@ export const getByName = (name) => {
             payload: oneGame.data
             })
         } catch(err){
-            console.log(err)
+            return alert('Sorry, there is not a game! try again.')
+            // console.log({err: 'There is not game'})
         } 
     }
 }
@@ -64,11 +65,11 @@ export const getByGenres = (id) => {
     }
 }
 
-
+//executes passing genres and status from action.payload
 export const filterGenres = (genres, status) => {
     return{
         type: 'FILTER_BY_GENRE',
-        payload: {genres, status}
+        payload: {genres, status} 
     }
 }
 
@@ -126,7 +127,13 @@ export const updateVideogame = (id, data) => {
 }
 
 
-
+//TESTING
+// export const searchVideogame = (name) => {
+//   return {
+//     type: 'SEARCH_VIDEOGAME',
+//     payload: name,
+//   };
+// };
 
 
 
