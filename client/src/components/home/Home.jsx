@@ -1,10 +1,10 @@
 import {useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
-import Styles from '../home/Home.module.css'
+import Style from '../home/Home.module.css'
 import NavBar from '../navBar/NavBar';
 import VideogameCard from '../videogameCard/VideogameCard'
 import Pagination from './pagination/Pagination'
-import Loading from '../assets/DonkeyKongLoader.gif'
+
 //---Import Actions--//
 import { 
     getVideogames,
@@ -13,6 +13,7 @@ import {
     filterGenres,
     sortVideogame,
     getByName,
+    // searchVideogame,//testing
    
  } from '../../actions/actions.js'
 
@@ -24,20 +25,17 @@ const Home  = () => {
     const allVideogames = useSelector((state) => state.copyVideogames);
     const genres = useSelector((state)=> state.genres);
     const [status, setStatus] = useState('All')
-   
+    const [loader, setLoader] = useState(true)
     
     //---Pagination ---//
     const [currentPage,setCurrentPage] = useState(1) // set page to 1
-    const [gamesPerPage,setGamesPerPage] = useState(16) // shows 16 games
-    const lastIndex = currentPage * gamesPerPage;  
-    const firstIndex = lastIndex - gamesPerPage;     
-    const currentGames = allVideogames?.slice(firstIndex,lastIndex) 
+    const [gamesPerPage,setGamesPerPage] = useState(15) // shows 15 games
+    const lastIndex = currentPage * gamesPerPage; // 15 
+    const firstIndex = lastIndex - gamesPerPage;  // 0   
+    const currentGames = allVideogames?.slice(firstIndex,lastIndex) //takes a part of the array
 
-    
-    const [loader, setLoader] = useState(true)
-
-   const pagination = (pageNum) =>{
-    setCurrentPage(pageNum)
+    const pagination = (pageNum) =>{
+    setCurrentPage(pageNum) //set the page
     }
 
  useEffect (()=> {
@@ -67,6 +65,7 @@ const handleSort= (e) => {
 
 const handleSearch= (value) => {
     dispatch(getByName(value))
+    // dispatch(searchVideogame(value))test
     setCurrentPage(1)
 }
 
@@ -82,29 +81,31 @@ return(
       <NavBar onSearch={handleSearch}/>
     <main>
     <div>
-        <div >
+        <div>
+            <div className={Style.selectContainer}>
+        <div className={Style.box}>
             <select onChange={handleSort}
             name='Genre'>
-            <option value='Sortby'selected disabled> Sort Order </option> 
+            <option value='Sortby'selected disabled> SORT ORDER </option> 
             <option value='A-Z'> A-Z </option>
             <option value='Z-A'> Z-A </option>
             </select>
-            <select onChange={handleSort} 
+            <select  onChange={handleSort} 
             >
-            <option value='Rating'selected disabled> Rating </option> 
-            <option value='Top Rated'>Top⬆</option>
-            <option value='Lower Rated'>Lower⬇</option>
+            <option value='Rating'selected disabled> RATING </option> 
+            <option value='Top Rated'>MAX⬆</option>
+            <option value='Lower Rated'>LOW⬇</option>
             </select>
-           <select  onChange={e => handleFilterCreated(e)}
+           <select onChange={e => handleFilterCreated(e)}
            >
-            <option value='Filterby' selected disabled> Filter by </option>   
+            <option value='Filterby' selected disabled> FILTER </option>   
             <option value='All'>All</option>
             <option value='Existing'> Existing </option>
             <option value='Created'>Created </option>
            </select>
-           <select onChange={handleFilterGenre} 
+        <select  onChange={handleFilterGenre} 
             name='Genres'>
-               <option value='Filter by Genres' selected disabled> Genres </option>
+               <option value='Filter by Genres' selected disabled> GENRES</option>
                {genres.map((g)=>{
                    return(
                        <option 
@@ -114,22 +115,22 @@ return(
                        </option>
                    )
                })}
-            </select>
-            
-            <div 
-            >
-            <Pagination gamesPerPage={gamesPerPage}
+         </select>
+        </div>
+    </div>  
+    <div className={Style.paginationBox}>
+            <Pagination className='pagination' gamesPerPage={gamesPerPage}
             allVideogames={allVideogames.length} 
             onPage={pagination}/>
-            </div>
-            
-            <button onClick={handleReloadBtn}
-           >
-               Reload
-               {/* <img alt='Reload' src={img}/> */}
-           </button>
-            <section >
-                {currentGames.length > 0 && !loader ?(currentGames.map( g => {
+    </div>
+          <div className={Style.reloadBtnContainer}>
+        <button data-text='Reload' className={Style.reloadBtn} onClick={handleReloadBtn}>
+        <span className='actualText'>&nbsp;reload&nbsp;</span>
+        <span className={Style.hoverText} aria-hidden='true'>&nbsp;reload&nbsp;</span>   
+        </button>
+        </div>  
+            <section className={Style.contentWrapper}>
+                {currentGames.length > 0 && !loader ?(currentGames.map((g) => {
                     return(
                         <VideogameCard 
                         key={g.id}
@@ -138,34 +139,30 @@ return(
                         background_image={g.background_image}
                         genres={g.genres}
                         rating={g.rating}
-                        />
+                        />   
                     )
                 })
-                ) : !currentGames && loader ? (
-                    <img alt='loader'
-                     src={Loading}/>
-                   
+                ) : !currentGames && loader ?(
+              
+                    <h1>loader pasar abajo si no funciona!!</h1>
+                 
                 ) : (
-                    <div>
-                        <div className={Styles.spinner}>
-                            <span>L</span>
-                            <span>O</span>
-                            <span>A</span>
-                            <span>D</span>
-                            <span>I</span>
-                            <span>N</span>
-                            <span>G</span>
-                     </div>
-                       <img alt='loader' src={Loading} width='100%' hight='auto'/>
+                    <div className={Style.loaderAlign}>
+                        <div className={Style.loader}>
+                            <div className={Style.face}>
+                                <div className={Style.circle}></div> 
+                            </div>
+                            <div className={Style.face}>
+                                <div className={Style.circle}></div>
+                            </div>
+                        </div>
                     </div>
-                )}
+                )} 
             </section>
         </div>
-
     </div>
-    </main>
-    </>
-
+</main>
+</>
  )
 }
 export default Home;

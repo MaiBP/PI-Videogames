@@ -1,13 +1,14 @@
-.container{
+.container {
+ 
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: flex-end;
-} 
+}
 
 .bg {
-    background-image: url('../assets/arcadeLanding.jpeg');
+    background-image: url('../assets/img404.gif');
     background-size: cover;
     background-repeat:no-repeat;
     background-position: center;
@@ -16,25 +17,12 @@
 }
 
 
-.title{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color:blanchedalmond;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 90px;
-    margin-top: 500px;
-   
-}
-
 .btnAlign{
-
+    margin-top: 600px;
      display: flex;
      align-items: center;
      justify-content: center;
 }
-
-
 
 .button{
      

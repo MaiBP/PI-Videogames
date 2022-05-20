@@ -29,7 +29,7 @@ const getVG = async (req, res) => {
 
 const getSingleVG = async (req, res ) => {
     try{
-        const {id} = req.params 
+        const {id} = req.params //req.params
          //search from DB
          if(id.length > 7 && typeof id === 'string'){
             const dbVideogame = await getDBinfo();

@@ -2,7 +2,8 @@ import React, {useState, useEffect}from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { useParams} from "react-router-dom";
-import Styles from '../gameCreateForm/GameCreateForm.module.css'
+import Style from '../gameCreateForm/GameCreateForm.module.css'
+
 
 import {
     getByGenres,
@@ -74,7 +75,7 @@ const GameCreateForm = () =>{
  //--HANDLERS--//
  //validations
  function handleSubmit(e){
-     e.preventDefault(); //srting method without spaces
+     e.preventDefault(); //trim() string method without spaces
      if(!dataState.name.trim() && !dataState.description && !dataState.released.trim() && !dataState.rating && !dataState.background_image && !dataState.platforms.length && !dataState.genres.length){
         setValidator('OOopps! All the fields are required to create your game')
     } else if (!dataState.name.trim()){
@@ -165,113 +166,146 @@ const GameCreateForm = () =>{
    }
 
   return (
-    
-      <div>
-        <NavLink to='/home'>
-          <button className='btn-back'>Go Back</button>
-        </NavLink>
-        {id ? (
-            <h1 className='update'>Update your game</h1>
-        ) : (
-          <h1 className='create'> Let's create your game<h4 className='create-sub'>Don't forget to fill all the fields</h4></h1>
-          
-        )}
-        
-        { validator && <div className='alert'> {validator}</div>}
-        <form id='form' className={Styles.form}onSubmit={e => handleSubmit(e)}>
-           <label>Name:</label>
-                <input 
-                className='form-input'
-                type='text'
-                placeholder='Videogame title' 
-                name='name'
-                value={dataState.name} 
-                onChange={e => handleUpdate(e)}
-                />
-           
-                <label>Description:</label>
-                <input
-                 className='form-input'
-                type='text'
-                placeholder='Description' 
-                name='description'
-                value={dataState.description} 
-                onChange={e => handleUpdate(e)}
-                />
-                <label>Released date:</label>
-               <input
-                className='form-input'
-                type='date'
-                plaseholder='Released date' 
-                name='released'
-                value={dataState.released} 
-                onChange={e => handleUpdate(e)}
-                />
-                <label>Rating:</label>
-                <input
-                className='form-input'
-                type='range'
-                max='5'
-                min='1'
-                name='rating'
-                value={dataState.rating}
-                onChange={e => handleUpdate(e)}
-                />
-                <p>{dataState.rating}</p>
-                <label>Background Image:</label>
-               <input
-                className='form-input'
-                type='url'
-                placeholder='URL is required'
-                name='background_image'
-                value={dataState.background_image} 
-                onChange={e => handleUpdate(e)}
-                />
-            <label className={Styles.platforms}>Platforms:</label>
-                <div className={Styles.checkbox}>
-                    {Platforms.map( e => (
-                       
-                    <div key={e} className='platforms-form'>
-                         <input
-            
-                        className='check'
-                        type='checkbox'
-                        name='platforms'
-                        value={e}
-                        key={e} 
-                        onClick={e => handlePlatforms(e)}
-                        /> 
-                        <p> {e} </p>
+    <div>
+          <div className={Style.btnAlign}>
+                <NavLink to='/home'>
+                <button className={Style.backBtn}>
+                <span className={Style.buttonTop}>BACK HOME</span></button>
+                </NavLink>
+           </div>
+                {id ? (
+                    <div className={Style.titleAling}><h2 className='update'>UPDATE GAME</h2>
                     </div>
-                    ))}
-               </div>
-            
-             <div className='genres-form'>
-                <label>Genres:</label>
-                <div className='check-box'>
-                    {genres.map(e => (
-                        <div key={e.name}>
-                            <input 
-                            className='check'
-                            type='checkbox'
-                            name='genres'
-                            value={e.name}
-                            key={e.name} 
-                            onClick={e => handleGenres(e)}
-                            />
-                           <p className='genres'>{e.name}</p>
-                        </div> 
-                    ))}
-                    
+                
+             ) : (
+            <div className={Style.titleAling}><h2 className='create'>CREATE YOUR GAME!</h2></div>
+             
+        )}
+       
+<div className={Style.signupSection}>
+
+    
+     <form id='form' className={Style.signupForm}
+        onSubmit={e => handleSubmit(e)}>
+        
+        <ul className={Style.noBullet}>
+        <li>
+        <label>NAME:</label>
+        <input
+        required 
+        type='text'
+        maxlength='15'
+        className={Style.inputFields}  
+        name='name' 
+        placeholder='Game Name'
+        value={dataState.name} 
+        onChange={e => handleUpdate(e)}/>
+       </li>
+       <li>
+        <label>DESCRIPTION:</label>
+        <input 
+        required
+        type='text'
+        maxlength='50' 
+        className={Style.inputFields}  
+        name='description' 
+        placeholder='Description' 
+        value={dataState.description} 
+        onChange={e => handleUpdate(e)}/>
+       </li>
+       <li>
+        <label>RELEASED DATE:</label>
+        <input 
+        required
+        type='date' 
+        className={Style.inputFields} 
+        name='released' 
+        placeholder='Released date' 
+        value={dataState.released} 
+        onChange={e => handleUpdate(e)}/>
+       </li>
+      
+       <li>
+        <label>IMAGE URL:</label>
+        <input 
+        required
+        type='url' 
+        className={Style.inputFields}  
+        placeholder='URL image'
+        name='background_image' 
+        value={dataState.background_image} 
+        onChange={e => handleUpdate(e)}/>
+       </li>
+      <li>
+        <label>RATING:{dataState.rating}</label>
+        <input 
+        required
+        type='range' 
+        className={Style.inputFields} 
+        max='5'
+        min='1'
+        name='rating'
+        value={dataState.rating}
+        onChange={e => handleUpdate(e)}/> 
+      </li>
+      <li>
+      <label className={Style.container} id='genres'> GENRES:</label>
+        <div className={Style.align}> 
+        {genres.map(e => (
+               <div key={e.name}>
+                    <input 
+                    className={Style.input}
+                    type="checkbox" 
+                    name='genres' 
+                    key={e.name} 
+                    value={e.name} 
+                    onClick={e => handleGenres(e)}/>
+                    <span  className={Style.nameGenre} name='genres'>{e.name}</span>
                 </div>
-            </div>
-            <div className='btn-create'>
-                <button className='btn-submit' type='submit'> Create 🎮 </button>
-            </div>
-        </form>
-      </div>
-     
+           
+            ))}
+        </div>
+     </li>
+     <li>
+       <label className={Style.container}>  PLATFORMS: </label>
+       <div className={Style.align}>
+            {Platforms.map( e => (
+                <div key={e} className='platforms-form'>
+                <input
+                className={Style.input}
+                type='checkbox'
+                name='platforms'
+                value={e}
+                key={e} 
+                onClick={e => handlePlatforms(e)}
+                /> 
+                <span className={Style.nameGenre} name='platforms'> {e} </span>
+                     </div>
+             ))}
+     </div>
+    </li> 
+     {validator && 
+        <div className={Style.titleAling}>
+            <h3 className={Style.alert}>{validator}</h3>
+            
+        </div>}  
+    <li>
+       <button className={Style.createBtn} type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>CREATE</button>
+     </li>   
+    </ul>
+  </form>
+</div>
+</div>
   );
 };
 
 export default GameCreateForm;
+
+
+
+
+

@@ -1,50 +1,397 @@
-/* .container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: center;
+.titleAling{
+   display: flex;
   justify-content: center;
-  height: 100vh;
-  overflow: scroll;
+  align-items: center;
+  margin: 2px;
+  color:white;
+}
+
+/* HOME BUTTON */
+.btnAlign{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backBtn {
+  margin: 5px;
+  /* Variables */
+ --button_radius: 0.75em;
+ --button_color: #000000;
+ --button_outline_color: #ffffff;
+ font-size: 10px;
+ font-weight: bold;
+ border: none;
+ border-radius: var(--button_radius);
+ background: var(--button_outline_color);
+}
+
+.buttonTop {
+ display: block;
+ box-sizing: border-box;
+ border: 2px solid var(--button_outline_color);
+ border-radius: var(--button_radius);
+ padding: 0.75em 1.5em;
+ background: var(--button_color);
+ color: var(--button_outline_color);
+ transform: translateY(-0.2em);
+ transition: transform 0.1s ease;
+}
+
+.backBtn:hover .buttonTop {
+  /* Pull the button upwards when hovered */
+ transform: translateY(-0.33em);
+}
+
+.backBtn:active .buttonTop {
+  /* Push the button downwards when pressed */
+ transform: translateY(0);
+}
+
+/* ALERT */
+.alert{
+  font-size: 10px;
+  text-transform: uppercase;
   
-} */
-/* .form {
-  font-size: 23px;
+  border: solid transparent;
+  border-radius: 5px;
+  background:   rgb(255, 2, 2) 87%;
+}
+
+
+
+/* //FORM// */
+
+.signupSection {
+  font-size: 20px;
+  margin-top: 50px;
+  background: url('../assets/formBgarcade.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1100px;
+  height: 710px;
+  text-align: center;
+  display: flex;
+  color: white;
+  box-shadow: 0px 0px 30px 1px rgba(200, 0, 255, 0.427);
+  /* box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5); */
+}
+
+.info {
+  
+  width: 35%;
+  background: rgba(230, 230, 230, 0);
+  padding: 35px 1;
+  border-right: 5px solid rgba(30, 30, 30, .8);
+}
+.info h2 {
+   background-color: rgba(0, 0, 0, 0.447);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 30px;
+    font-weight: 700;
+  }
+ 
+  
+
+  .signupForm {
+  width: 60%;
+  padding: 18px 0;
+  background: rgba(16, 16, 16, 0.803);
+  transition: .2s;
+  border: 10px;
+}
+.signupForm h2 {
+    font-weight: 300;
+    
+  }
+
+  .inputFields {
+  border-radius: 10px;
+  margin: 10px 5px;
+  font-size: 16px;
+  padding: 12px;
+  width: 230px;
+  border: 2px solid rgb(200, 0, 255);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(244, 241, 241, 0.098);
+  color: rgb(255, 253, 253);
+  outline: none;
+}
+.noBullet {
+  list-style-type: none;
+ 
+}
+
+
+/* SELECTS */
+
+ .container {
+  
   display: flex;
   flex-direction: column;
-  width: 50%;
-  justify-content: space-around;
   align-items: center;
-  height: 800px;
-  margin-top: 19px;
+  justify-content: center;
   
-} */
-/* .platforms{
-  
-  display: block;
-  padding-left: 15px;
-  text-indent: -15px;
 }
-.checkbox{
-  
-   width: 13px;
-  height: 13px;
-  padding: 0;
-  margin:0;
-  vertical-align: bottom;
-  position: relative;
-  top: -1px;
-  *overflow: hidden;
-} */
-/* .form input {
-  width: 100%;
-  border: 3px solid black;
-  padding: 8px 0px;
-  border-radius: 5px;
+.align{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+}
 
-  font-size: 15px;
+   .selectItem {
+      display: flex;
+      flex: 1 1 auto;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+			/* cursor:pointer; */
+    }
+
+
+
+/* CHECKBOX */
+
+.input[type="checkbox"] {
   
-  text-align: center;
-  font-weight: bold;
-}  */
+ height: 1rem;
+ width: 1rem;
+ margin: 5px;
+ display: inline-block;
+ appearance: none;
+ position: relative;
+ background-color: #F2ECFF;
+ border-radius: 15%;
+ cursor: pointer;
+ overflow: hidden;
+}
+
+.input[type="checkbox"]::after {
+ content: '';
+ display: block;
+ height: 0.5rem;
+ width: .3rem;
+ border-bottom: .31rem solid #2a0054;
+ border-right: .31rem solid #2a0054;
+ opacity: 0;
+ transform: rotate(45deg) translate(-50%, -50%);
+ position: absolute;
+ top: 45%;
+ left: 21%;
+ transition: .25s ease;
+}
+
+.input[type="checkbox"]::before {
+ content: '';
+ display: block;
+ height: 0;
+ width: 0;
+ background-color:lime;
+ border-radius: 50%;
+ opacity: .5;
+ transform: translate(-50%, -50%);
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transition: .3s ease;
+}
+
+.input[type="checkbox"]:checked::before {
+ height: 130%;
+ width: 130%;
+ opacity: 100%;
+}
+
+.input[type="checkbox"]:checked::after {
+ opacity: 100%;
+}
+
+.nameGenre {
+  
+ font-size: 1rem;
+}
+
+
+/* CREATE BOTTON */
+
+.createBtn {
+ margin: 20px;
+ position: relative;
+ padding: 1em 1.8em;
+ outline: none;
+ border: 1px solid #303030;
+ background: #212121;
+ color: rgb(200, 0, 255);
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ font-size: 15px;
+ overflow: hidden;
+ transition: 0.2s;
+ border-radius: 20px;
+ cursor: pointer;
+ font-weight: bold;
+}
+
+.createBtn:hover {
+ box-shadow: 0 0 10px rgb(200, 0, 255), 0 0 25px lime, 0 0 50px rgb(200, 0, 255);
+ transition-delay: 0.6s;
+}
+
+.createBtn span {
+ position: absolute;
+}
+
+.createBtn span:nth-child(1) {
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 2px;
+ background: linear-gradient(90deg, transparent, rgb(200, 0, 255));
+}
+
+.createBtn:hover span:nth-child(1) {
+ left: 100%;
+ transition: 0.7s;
+}
+
+.createBtn span:nth-child(3) {
+ bottom: 0;
+ right: -100%;
+ width: 100%;
+ height: 2px;
+ background: linear-gradient(90deg, transparent, rgb(200, 0, 255));
+}
+
+.createBtn:hover span:nth-child(3) {
+ right: 100%;
+ transition: 0.7s;
+ transition-delay: 0.35s;
+}
+
+.createBtn span:nth-child(2) {
+ top: -100%;
+ right: 0;
+ width: 2px;
+ height: 100%;
+ background: linear-gradient(180deg, transparent, rgb(200, 0, 255));
+}
+
+.createBtn:hover span:nth-child(2) {
+ top: 100%;
+ transition: 0.7s;
+ transition-delay: 0.17s;
+}
+
+.createBtn span:nth-child(4) {
+ bottom: -100%;
+ left: 0;
+ width: 2px;
+ height: 100%;
+ background: linear-gradient(360deg, transparent, lime);
+}
+
+.createBtn:hover span:nth-child(4) {
+ bottom: 100%;
+ transition: 0.7s;
+ transition-delay: 0.52s;
+}
+
+.createBtn:active {
+ background: rgb(200, 0, 255);
+ background: linear-gradient(to top right, rgb(200, 0, 255), rgb(200, 0, 255));
+ color: lime;
+ box-shadow: 0 0 8px rgb(200, 0, 255), 0 0 8px rgb(200, 0, 255), 0 0 8px rgb(200, 0, 255);
+ transition: 0.1s;
+}
+
+.createBtn:active span:nth-child(1) 
+span:nth-child(2) 
+span:nth-child(2) 
+span:nth-child(2) {
+ transition: none;
+ transition-delay: none;
+}
+
+
+@media screen and (max-width: 1052px){
+  .signupSection{
+  font-size: 10px;
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -30%);
+  width: 500px;
+  height: 400px;
+    }
+
+  .signupForm {
+  width: 92%;
+  padding:  2px;
+  
+}
+   .inputFields {
+  border-radius: 5px;
+  margin: 5px 1px;
+  font-size: 8px;
+  padding: 2px;
+  width: 75px;
+}
+
+.align{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+ /* CHECKBOX @MEDIA*/
+
+.input[type="checkbox"] {
+ height: 0.5rem;
+ width: 0.5rem;
+ margin: 3px;
+ display: inline-block;
+ appearance: none;
+ position: relative;
+ cursor: pointer;
+ overflow: hidden;
+}
+
+.input[type="checkbox"]::after {
+ content: '';
+ display: block;
+ height: 0.4rem;
+ width: .2rem;
+ border-bottom: .15rem solid #2a0054;
+ border-right: .15rem solid #2a0054;
+ position: absolute;
+ top: 40%;
+ left: 15%;
+}
+
+.nameGenre {
+  
+ font-size: 0.8rem;
+}
+
+
+.createBtn {
+ font-size: 10px;
+}
+
+
+.alert{
+  font-size: 7px;
+  
+}
+
+
+}

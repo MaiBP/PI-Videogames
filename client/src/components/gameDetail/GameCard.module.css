@@ -1,0 +1,56 @@
+
+.container {
+    font-size: 15px;
+  margin-top: 20px;
+  background: url('../assets/gmBg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 700px;
+  text-align: center;
+  display: flex;
+  color: white;
+  box-shadow: 3px 10px 20px 5px rgba(255, 0, 217, 0.5);
+   align-items:center;
+justify-content: center;
+    border-radius: 50px;
+
+}
+
+.containerText{
+  color: white;
+  padding: 10px;
+  grid-gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 15rem);
+  justify-content: center;
+
+}
+.titleDescription{ 
+  color: white;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.contDescription{
+     width: 60%;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+    color: rgb(255, 254, 254);
+    background: rgba(15, 14, 16, 0.406);
+    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+    
+}

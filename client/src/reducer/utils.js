@@ -1,4 +1,4 @@
-//-- FILTERS, SORT & SEARCH
+//-- FILTERS & SORT 
 
 
 export const filterVideogames = (value, array) =>{
@@ -46,7 +46,10 @@ export const sortVideogame = (sortOrder, array) => {
 
 
 
-
+//search test
+// export const searchVideogame = (name, array) => {
+//   return array.filter((game) => game.name.toLowerCase() === name.toLowerCase());
+// };
 
 
 

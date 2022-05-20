@@ -3,6 +3,7 @@ import {
 filterVideogames,
 filterByGenres,
 sortVideogame,
+// searchVideogame,
 } from './utils'
 
 
@@ -38,6 +39,13 @@ function rootReducer (state = initialState, action) {
         ...state,
         copyVideogames: action.payload,
       }
+    //    case 'GET_BY_ID':{
+    //   return {
+    //     ...state,
+    //     copyVideogames: action.payload,
+    //   }
+    // }
+
       case 'GET_BY_ID':{
       return {
         ...state,
@@ -45,7 +53,6 @@ function rootReducer (state = initialState, action) {
       }
     }
     
-
     case 'ADD_VIDEOGAME':{
       return {
         ...state,
@@ -89,6 +96,13 @@ function rootReducer (state = initialState, action) {
         ...state,
         copyVideogames: sortVideogame(action.payload, state.videogames)
       }
+
+      //testing!!
+    //  case 'SEARCH_VIDEOGAME':
+    //   return {
+    //     ...state,
+    //    copyVideogame: searchVideogame(action.payload, state.videogames),
+    //   };
 
 
      default: return state;

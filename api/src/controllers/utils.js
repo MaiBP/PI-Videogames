@@ -4,13 +4,14 @@ const {API_KEY} = process.env;
 
 // ?offset=0&limit=100 --> it limits the info and increasing the performance(reduces networktime) // Not working!
 //&page_size=100 --> limits page size, works!
+//&number=100
 
 // --- Get apiInfo -- //
 
 const getApiInfo = async () => {
     try{
         const videogames = [];
-         let apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}&page_size=100`;
+         let apiUrl = `https://api.rawg.io/api/games?key=${API_KEY}`;
          for (let i = 1; i < 8; i++) {
              let gamesPages = await axios.get(apiUrl);
               gamesPages.data?.results.forEach((e) => {
