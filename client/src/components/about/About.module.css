@@ -45,8 +45,11 @@
 .description a{
   text-decoration: none;
 }
-.description a:visited{
+.description a:link{
 color:yellow;
+}
+.description a:visited{
+color:rgb(255, 140, 0);
 }
 .description h4{
   text-align: center;

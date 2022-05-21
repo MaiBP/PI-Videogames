@@ -21,8 +21,8 @@ function App() {
         <Route path='/gameCreateForm' element={<GameCreateForm/>} />
         <Route path='/home/:id' element={<GameDetail/>} />
         <Route path='/updateVideogame/:id' element={<GameCreateForm/>}/>
-        <Route path='/about' element={<About/>} />
-         <Route path="*" element={<NotFoundPg/>} />
+        <Route path='/about' element={<About/>}/>
+        <Route path= '*' element={<NotFoundPg/>} />
      </Routes>
       </BrowserRouter>
     </div>
@@ -32,4 +32,4 @@ function App() {
 
 export default App;
 
- {/* <Route path='/home/about' element={<About/>} /> */}
+ 
