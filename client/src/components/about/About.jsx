@@ -28,8 +28,6 @@ const About = () => {
         </div>
     <div>
       </div>
-
-
     <div className={Style.social}>
       <h3>You can contact me on the following social media platforms:</h3>
       <a rel='noreferrer' target='_blank' href='https://www.linkedin.com/in/maira-pajaro-93b274189/'><TiSocialLinkedin/></a>
@@ -37,8 +35,6 @@ const About = () => {
       <a rel='noreferrer' target='_blank' href='https://twitter.com/MaiPajaro'><TiSocialTwitter/></a> 
       
     </div>
-
-
     <div className={Style.btnAlign}>
                     <NavLink to='/home'>
                     <button className={Style.backBtn}>
