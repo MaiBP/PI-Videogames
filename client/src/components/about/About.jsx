@@ -27,8 +27,6 @@ const About = () => {
             <p><RiEmotionHappyLine/>Hope you like my work and thanks for sharing!<RiEmotionHappyLine/></p>
         </div>
     <div>
-        
-        
       </div>
 
 
