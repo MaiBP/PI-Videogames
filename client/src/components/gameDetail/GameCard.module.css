@@ -54,3 +54,42 @@ justify-content: center;
     
     
 }
+
+@media screen and (max-width: 1052px){
+    .container{
+    font-size: 10px;
+    margin-top: 50px;
+  
+    width: 100vw;
+    height: 100vh;
+    border-radius: 20px;
+ 
+    }
+    .titleDescription{ 
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+}
+  .containerText{
+  display: grid;
+  grid-template-columns: 2fr;
+  justify-content: center;
+   padding: 2px;
+   grid-gap: 10px;
+} 
+.contDescription{
+    
+     width: 100vw;
+     height: 100vh;
+  
+    margin: 1px;
+    padding: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: center;
+}
+}

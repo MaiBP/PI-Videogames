@@ -38,3 +38,16 @@
   /* Push the button downwards when pressed */
  transform: translateY(0);
 }
+
+@media screen and (max-width: 1052px){
+    .btncontainer{
+         display: flex;
+  justify-content: center;
+  align-items: center;
+    margin-top: 2px;
+    }
+
+   
+  }
+
+  
