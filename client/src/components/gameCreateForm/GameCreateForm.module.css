@@ -168,7 +168,7 @@
  display: inline-block;
  appearance: none;
  position: relative;
- background-color: #F2ECFF;
+ background-color: #615f63;
  border-radius: 15%;
  cursor: pointer;
  overflow: hidden;
@@ -179,8 +179,8 @@
  display: block;
  height: 0.5rem;
  width: .3rem;
- border-bottom: .31rem solid #2a0054;
- border-right: .31rem solid #2a0054;
+ border-bottom: .31rem solid #000000;
+ border-right: .31rem solid #000000;
  opacity: 0;
  transform: rotate(45deg) translate(-50%, -50%);
  position: absolute;
@@ -321,6 +321,8 @@ span:nth-child(2) {
 }
 
 
+/* @MEDIA */
+
 @media screen and (max-width: 1052px){
   .signupSection{
   font-size: 10px;
@@ -366,12 +368,12 @@ span:nth-child(2) {
 }
 
 .input[type="checkbox"]::after {
- content: '';
- display: block;
+ /* content: '';
+ display: block; */
  height: 0.4rem;
  width: .2rem;
- border-bottom: .15rem solid #2a0054;
- border-right: .15rem solid #2a0054;
+ border-bottom: .15rem solid #000000;
+ border-right: .15rem solid #000000;
  position: absolute;
  top: 40%;
  left: 15%;

@@ -138,6 +138,7 @@ const GameCreateForm = () =>{
     };
 
     function handlePlatforms(e) {
+        console.log(e.target.value);
         if(e.target.checked){
             setDataState({
                 ...dataState,
@@ -273,7 +274,7 @@ const GameCreateForm = () =>{
                 <div key={e} className='platforms-form'>
                 <input
                 className={Style.input}
-                type='checkbox'
+                type="checkbox"
                 name='platforms'
                 value={e}
                 key={e} 
