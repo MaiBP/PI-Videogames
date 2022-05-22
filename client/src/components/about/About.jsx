@@ -33,7 +33,7 @@ const About = () => {
 
 
     <div className={Style.social}>
-      <h3>You can contact me on the following social medias platforms:</h3>
+      <h3>You can contact me on the following social media platforms:</h3>
       <a rel='noreferrer' target='_blank' href='https://www.linkedin.com/in/maira-pajaro-93b274189/'><TiSocialLinkedin/></a>
       <a rel='noreferrer' target='_blank' href='https://github.com/MaiBP'><BsGithub/></a>
       <a rel='noreferrer' target='_blank' href='https://twitter.com/MaiPajaro'><TiSocialTwitter/></a> 
