@@ -29,7 +29,7 @@ const NavBar = ({onSearch}) =>{
     <nav className={Style.navbar}>
        <ul>
          
-         <li className={Style.logo}><img className={Style.img} src={img}/></li>
+         <li className={Style.logo}><img alt='' className={Style.img} src={img}/></li>
          <li className={Style.title}>VIDEOGAMES EXPLORER</li>
         
          <div className={Style.items}>
