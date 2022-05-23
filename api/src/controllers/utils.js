@@ -37,18 +37,11 @@ const getApiInfo = async () => {
 const getDBinfo = async () => {
     try{
     const info = await Videogame.findAll({
-        // where: {},
-        // include: {
-        //     model: Genre,
-        //     attributes: ['name'],
-        // }
+        where: {},
         include: {
-        model: Genre,
-        attributes: ["name"],
-        through: {
-        attributes: [],
-      },
-    }
+            model: Genre,
+            attributes: ['name'],
+        }
     })
     //Map to look for videogame
     const gamesWithGenre = info.map((g) => {
@@ -73,7 +66,7 @@ const getDBinfo = async () => {
 
 //--- Concat videogames from api and genres from DB ---//
 
-//change api limit=100 it works.
+
 
 const getAllInfo = async () => {
     // console.log()
