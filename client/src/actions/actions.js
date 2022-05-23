@@ -4,13 +4,14 @@ import axios from 'axios';
 //--- All games data ---//
 export function getVideogames(){
     return async function (dispatch){
-        console.log(dispatch)
+        // console.log(dispatch)
     try{
         const url = await axios.get('/videogames')
-        // console.log(url)
+        // console.log(url.data)
         return dispatch({
         type: 'GET_VIDEOGAMES',
         payload: url.data
+        
     })
     }catch(err){
         console.log({msg:`THIS IS THE ERROR ${err}`});
