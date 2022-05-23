@@ -37,11 +37,18 @@ const getApiInfo = async () => {
 const getDBinfo = async () => {
     try{
     const info = await Videogame.findAll({
-        where: {},
+        // where: {},
+        // include: {
+        //     model: Genre,
+        //     attributes: ['name'],
+        // }
         include: {
-            model: Genre,
-            attributes: ['name'],
-        }
+        model: Genre,
+        attributes: ["name"],
+        through: {
+        attributes: [],
+      },
+    }
     })
     //Map to look for videogame
     const gamesWithGenre = info.map((g) => {
