@@ -66,11 +66,17 @@ const getDBinfo = async () => {
 
 //--- Concat videogames from api and genres from DB ---//
 
+//change api limit=100 it works.
+
 const getAllInfo = async () => {
+    console.log()
     try{
-        const infoApi = await getApiInfo();
+        const infoApi = await getApiInfo(
+            `https://api.rawg.io/api/games?key=${API_KEY}offset=0&limit=100`
+        );
         const gameDb = await getDBinfo();
         const allInfo = [...infoApi, ...gameDb];
+        // console.log( `all info ${infoApi}`)
         return allInfo;
     }catch(err){
         console.log(err);
