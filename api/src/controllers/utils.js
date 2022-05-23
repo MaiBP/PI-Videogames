@@ -69,11 +69,9 @@ const getDBinfo = async () => {
 //change api limit=100 it works.
 
 const getAllInfo = async () => {
-    console.log()
+    // console.log()
     try{
-        const infoApi = await getApiInfo(
-            `https://api.rawg.io/api/games?key=${API_KEY}offset=0&limit=100`
-        );
+        const infoApi = await getApiInfo();
         const gameDb = await getDBinfo();
         const allInfo = [...infoApi, ...gameDb];
         // console.log( `all info ${infoApi}`)
