@@ -8,7 +8,6 @@
     "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.27.2",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
