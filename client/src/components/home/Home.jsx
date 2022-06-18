@@ -86,15 +86,15 @@ return(
         <div className={Style.box}>
             <select onChange={handleSort}
             name='Genre'>
-            <option value='Sortby'selected disabled> SORT ORDER </option> 
-            <option value='A-Z'> A-Z </option>
-            <option value='Z-A'> Z-A </option>
+                <option value='Sortby'selected disabled> SORT ORDER </option> 
+                <option value='A-Z'> A-Z </option>
+                <option value='Z-A'> Z-A </option>
             </select>
             <select  onChange={handleSort} 
             >
-            <option value='Rating'selected disabled> RATING </option> 
-            <option value='Top Rated'>MAX⬆</option>
-            <option value='Lower Rated'>LOW⬇</option>
+                <option value='Rating'selected disabled> RATING </option> 
+                <option value='Top Rated'>MAX⬆</option>
+                <option value='Lower Rated'>LOW⬇</option>
             </select>
            <select onChange={e => handleFilterCreated(e)}
            >
