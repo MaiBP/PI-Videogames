@@ -3,10 +3,12 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, 
-  DB_PASSWORD, 
-  DB_HOST,
+  // DATABASE_URL,
   DB_NAME,
+  DB_HOST,
+  DB_USER,
+  DB_PASSWORD,
+
 } = process.env;
 
 let sequelize =
@@ -39,9 +41,15 @@ let sequelize =
       );
 
 //This is blocked for deployment
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
+// const sequelize = new Sequelize( DATABASE_URL, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+//   dialectOptions:{
+//    ssl:{
+//   require:true,
+//   rejectUnauthorized: false,
+//  }
+// }
 // });
 const basename = path.basename(__filename);
 
